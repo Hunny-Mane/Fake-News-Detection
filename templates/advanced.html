@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Features - Fake News Detection</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: #667eea;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .feature-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .result-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+        }
+
+        .result-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .result-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e1e5e9;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .search-result-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e1e5e9;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-result-item:hover {
+            background: #f8f9fa;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-title-text {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .result-snippet {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .analysis-details {
+            margin-top: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .detail-value {
+            color: #333;
+        }
+
+        .risk-indicator {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .risk-low {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .risk-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .risk-high {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .risk-critical {
+            background: #f5c6cb;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <i class="fas fa-shield-alt"></i> NetCred
+            </a>
+            <ul class="nav-links">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/dashboard"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="/advanced"><i class="fas fa-cogs"></i> Advanced</a></li>
+                <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-cogs"></i> Advanced Features</h1>
+            <p>Enhanced fake news detection with image analysis, multilingual support, and advanced search</p>
+        </div>
+
+        <div class="features-grid">
+            <!-- Image Analysis Feature -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon"><i class="fas fa-image"></i></div>
+                    <div class="feature-title">Image Analysis</div>
+                </div>
+                <div class="feature-content">
+                    <p>Analyze images for manipulation, deepfake detection, and authenticity verification.</p>
+                    
+                    <form id="imageAnalysisForm">
+                        <div class="form-group">
+                            <label for="imageUrl">Image URL</label>
+                            <input type="url" id="imageUrl" placeholder="Enter image URL...">
+                        </div>
+                        <div class="form-group">
+                            <label for="imageFile">Or Upload Image</label>
+                            <input type="file" id="imageFile" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Analyze Image
+                        </button>
+                    </form>
+
+                    <div class="loading" id="imageLoading">
+                        <div class="spinner"></div>
+                        <p>Analyzing image...</p>
+                    </div>
+
+                    <div class="result-section" id="imageResult">
+                        <div class="result-title">Analysis Results</div>
+                        <div class="result-content" id="imageResultContent">
+                            <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multilingual Analysis Feature -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                    <div class="feature-title">Multilingual Analysis</div>
+                </div>
+                <div class="feature-content">
+                    <p>Analyze news in multiple languages with automatic language detection and translation.</p>
+                    
+                    <div class="language-selector">
+                        <button class="lang-btn active" data-lang="en">English</button>
+                        <button class="lang-btn" data-lang="hi">हिंदी</button>
+                        <button class="lang-btn" data-lang="gu">ગુજરાતી</button>
+                        <button class="lang-btn" data-lang="ta">தமிழ்</button>
+                    </div>
+
+                    <form id="multilingualForm">
+                        <div class="form-group">
+                            <label for="multilingualText">News Content</label>
+                            <textarea id="multilingualText" rows="4" placeholder="Enter news content in any supported language..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-language"></i> Analyze Multilingual
+                        </button>
+                    </form>
+
+                    <div class="loading" id="multilingualLoading">
+                        <div class="spinner"></div>
+                        <p>Analyzing multilingual content...</p>
+                    </div>
+
+                    <div class="result-section" id="multilingualResult">
+                        <div class="result-title">Multilingual Analysis Results</div>
+                        <div class="result-content" id="multilingualResultContent">
+                            <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Search Feature -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon"><i class="fas fa-search-plus"></i></div>
+                    <div class="feature-title">Advanced Search</div>
+                </div>
+                <div class="feature-content">
+                    <p>Search through news titles with advanced filtering and pattern matching.</p>
+                    
+                    <form id="advancedSearchForm">
+                        <div class="form-group">
+                            <label for="searchQuery">Search Query</label>
+                            <input type="text" id="searchQuery" placeholder="Enter search terms...">
+                        </div>
+                        <div class="form-group">
+                            <label for="searchType">Search Type</label>
+                            <select id="searchType">
+                                <option value="title">Title Only</option>
+                                <option value="content">Content Only</option>
+                                <option value="both">Title & Content</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="newsType">News Type Filter</label>
+                            <select id="newsType">
+                                <option value="all">All News</option>
+                                <option value="true">True News Only</option>
+                                <option value="fake">Fake News Only</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Advanced Search
+                        </button>
+                    </form>
+
+                    <div class="loading" id="searchLoading">
+                        <div class="spinner"></div>
+                        <p>Searching...</p>
+                    </div>
+
+                    <div class="result-section" id="searchResult">
+                        <div class="result-title">Search Results</div>
+                        <div class="search-results" id="searchResultsContent">
+                            <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image Analysis
+        document.getElementById('imageAnalysisForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const imageUrl = document.getElementById('imageUrl').value;
+            const imageFile = document.getElementById('imageFile').files[0];
+            const loading = document.getElementById('imageLoading');
+            const result = document.getElementById('imageResult');
+            const resultContent = document.getElementById('imageResultContent');
+            
+            if (!imageUrl && !imageFile) {
+                alert('Please provide either an image URL or upload a file');
+                return;
+            }
+            
+            loading.style.display = 'block';
+            result.classList.remove('show');
+            
+            try {
+                const formData = new FormData();
+                if (imageFile) {
+                    formData.append('image', imageFile);
+                } else {
+                    formData.append('imageUrl', imageUrl);
+                }
+                
+                const response = await fetch('/api/analyze-image', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayImageResults(data.results, resultContent);
+                    result.classList.add('show');
+                } else {
+                    alert('Image analysis failed: ' + data.error);
+                }
+            } catch (error) {
+                alert('Error analyzing image: ' + error.message);
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+
+        // Multilingual Analysis
+        document.getElementById('multilingualForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const text = document.getElementById('multilingualText').value;
+            const language = document.querySelector('.lang-btn.active').dataset.lang;
+            const loading = document.getElementById('multilingualLoading');
+            const result = document.getElementById('multilingualResult');
+            const resultContent = document.getElementById('multilingualResultContent');
+            
+            if (!text.trim()) {
+                alert('Please enter some text to analyze');
+                return;
+            }
+            
+            loading.style.display = 'block';
+            result.classList.remove('show');
+            
+            try {
+                const response = await fetch('/api/analyze-multilingual', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        language: language
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayMultilingualResults(data.results, resultContent);
+                    result.classList.add('show');
+                } else {
+                    alert('Multilingual analysis failed: ' + data.error);
+                }
+            } catch (error) {
+                alert('Error analyzing multilingual content: ' + error.message);
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+
+        // Advanced Search
+        document.getElementById('advancedSearchForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const query = document.getElementById('searchQuery').value;
+            const searchType = document.getElementById('searchType').value;
+            const newsType = document.getElementById('newsType').value;
+            const loading = document.getElementById('searchLoading');
+            const result = document.getElementById('searchResult');
+            const resultContent = document.getElementById('searchResultsContent');
+            
+            if (!query.trim()) {
+                alert('Please enter a search query');
+                return;
+            }
+            
+            loading.style.display = 'block';
+            result.classList.remove('show');
+            
+            try {
+                const response = await fetch('/api/advanced-search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        searchType: searchType,
+                        newsType: newsType
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displaySearchResults(data.results, resultContent, data.search_stats);
+                    result.classList.add('show');
+                } else {
+                    alert('Search failed: ' + data.error);
+                }
+            } catch (error) {
+                alert('Error searching: ' + error.message);
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+
+        // Language selector
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function displayImageResults(results, container) {
+            const riskClass = getRiskClass(results.finalAssessment.riskLevel);
+            
+            container.innerHTML = `
+                <div class="analysis-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Authenticity:</span>
+                        <span class="detail-value ${results.finalAssessment.isFake ? 'risk-high' : 'risk-low'}">
+                            ${results.finalAssessment.isFake ? 'FAKE' : 'AUTHENTIC'}
+                        </span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Confidence:</span>
+                        <span class="detail-value">${results.finalAssessment.confidence}%</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Risk Level:</span>
+                        <span class="detail-value risk-indicator ${riskClass}">${results.finalAssessment.riskLevel}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Overall Score:</span>
+                        <span class="detail-value">${results.finalAssessment.overallScore}/100</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <strong>Summary:</strong> ${results.finalAssessment.summary}
+                </div>
+                <div style="margin-top: 1rem;">
+                    <strong>Recommendations:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        ${results.finalAssessment.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function displayMultilingualResults(results, container) {
+            const riskClass = getRiskClass(results.classification.level);
+            
+            container.innerHTML = `
+                <div class="analysis-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Detected Language:</span>
+                        <span class="detail-value">${results.detectedLanguage}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Classification:</span>
+                        <span class="detail-value ${results.classification.isFake ? 'risk-high' : 'risk-low'}">
+                            ${results.classification.isFake ? 'FAKE' : 'REAL'}
+                        </span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Confidence:</span>
+                        <span class="detail-value">${results.confidence}%</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Fake Score:</span>
+                        <span class="detail-value">${results.fakeScore}/100</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Risk Level:</span>
+                        <span class="detail-value risk-indicator ${riskClass}">${results.classification.level}</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <strong>Analysis Factors:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        ${results.factors.map(factor => `<li>${factor}</li>`).join('')}
+                    </ul>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <strong>Recommendations:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        ${results.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function displaySearchResults(results, container, searchStats) {
+            if (results.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #666;">No results found</div>';
+                return;
+            }
+            
+            // Create search statistics header
+            let statsHtml = '';
+            if (searchStats) {
+                statsHtml = `
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #667eea;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; font-size: 0.9rem;">
+                            <div><strong>Total Matches:</strong> ${searchStats.total_matches}</div>
+                            <div><strong>Search Type:</strong> ${searchStats.search_type}</div>
+                            <div><strong>Filter:</strong> ${searchStats.news_type_filter}</div>
+                            <div><strong>Dataset Size:</strong> ${searchStats.dataset_size}</div>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #666;">
+                            <strong>Query Terms:</strong> ${searchStats.query_terms.join(', ')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Create results HTML
+            const resultsHtml = results.map(result => `
+                <div class="search-result-item" onclick="analyzeSearchResult('${result.title.replace(/'/g, "\\'")}', '${result.full_text.replace(/'/g, "\\'")}')">
+                    <div class="result-title-text">${result.title}</div>
+                    <div class="result-snippet">${result.text}</div>
+                    <div style="margin-top: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span class="risk-indicator ${result.label === 0 ? 'risk-low' : 'risk-high'}">
+                            ${result.news_type}
+                        </span>
+                        <span style="font-size: 0.8rem; color: #666;">
+                            Match Score: ${result.match_score.toFixed(1)}
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = statsHtml + resultsHtml;
+        }
+
+        function getRiskClass(riskLevel) {
+            switch(riskLevel) {
+                case 'LOW': return 'risk-low';
+                case 'MEDIUM': return 'risk-medium';
+                case 'HIGH': return 'risk-high';
+                case 'CRITICAL': return 'risk-critical';
+                default: return 'risk-low';
+            }
+        }
+
+        function analyzeSearchResult(title, text) {
+            // Store the data in sessionStorage to pass to main page
+            sessionStorage.setItem('searchResultTitle', title);
+            sessionStorage.setItem('searchResultContent', text);
+            
+            // Navigate to main page
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>

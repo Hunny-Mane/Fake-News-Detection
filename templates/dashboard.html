@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Fake News Detection</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon.total { color: #667eea; }
+        .stat-icon.true { color: #28a745; }
+        .stat-icon.fake { color: #dc3545; }
+        .stat-icon.avg { color: #ffc107; }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .stat-subtitle {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .full-width-chart {
+            grid-column: 1 / -1;
+        }
+
+        .insights-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .insights-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .insight-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .insight-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .insight-text {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .model-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .model-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .model-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .model-stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .model-stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .model-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <i class="fas fa-shield-alt"></i> NetCred
+            </a>
+            <ul class="nav-links">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/dashboard"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="/advanced"><i class="fas fa-cogs"></i> Advanced</a></li>
+                <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-chart-line"></i> Analytics Dashboard</h1>
+            <p>Comprehensive insights into our fake news detection model and dataset</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon total"><i class="fas fa-newspaper"></i></div>
+                <div class="stat-number" id="totalNews">{{ stats.total_news }}</div>
+                <div class="stat-label">Total Articles</div>
+                <div class="stat-subtitle">Dataset + Analysis</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon true"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-number" id="trueNews">{{ stats.true_news }}</div>
+                <div class="stat-label">True News</div>
+                <div class="stat-subtitle">Dataset: {{ stats.dataset_stats.true_news }} | Analysis: {{ stats.analysis_stats.true_analyses }}</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon fake"><i class="fas fa-times-circle"></i></div>
+                <div class="stat-number" id="fakeNews">{{ stats.fake_news }}</div>
+                <div class="stat-label">Fake News</div>
+                <div class="stat-subtitle">Dataset: {{ stats.dataset_stats.fake_news }} | Analysis: {{ stats.analysis_stats.fake_analyses }}</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon avg"><i class="fas fa-chart-line"></i></div>
+                <div class="stat-number" id="totalAnalyses">{{ stats.analysis_stats.total_analyses }}</div>
+                <div class="stat-label">Total Analyses</div>
+                <div class="stat-subtitle">Real-time tracking</div>
+            </div>
+        </div>
+
+        <!-- Real-time Analysis Statistics -->
+        <div class="stats-grid" style="margin-top: 2rem;">
+            <div class="stat-card">
+                <div class="stat-icon total"><i class="fas fa-search"></i></div>
+                <div class="stat-number" id="totalSearches">{{ stats.analysis_stats.total_searches }}</div>
+                <div class="stat-label">Total Searches</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon true"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-number" id="realDetected">{{ stats.analysis_stats.real_detected }}</div>
+                <div class="stat-label">Real Detected</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon fake"><i class="fas fa-times-circle"></i></div>
+                <div class="stat-number" id="fakeDetected">{{ stats.analysis_stats.fake_detected }}</div>
+                <div class="stat-label">Fake Detected</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon avg"><i class="fas fa-image"></i></div>
+                <div class="stat-number" id="imageAnalyses">{{ stats.analysis_stats.image_analyses }}</div>
+                <div class="stat-label">Image Analyses</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon avg"><i class="fas fa-globe"></i></div>
+                <div class="stat-number" id="multilingualAnalyses">{{ stats.analysis_stats.multilingual_analyses }}</div>
+                <div class="stat-label">Multilingual Analyses</div>
+            </div>
+        </div>
+
+        {% if plots %}
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3 class="chart-title"><i class="fas fa-chart-pie"></i> Total News Distribution</h3>
+                <div class="chart-container">
+                    <img src="data:image/png;base64,{{ plots.label_dist }}" alt="Total News Distribution" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title"><i class="fas fa-chart-line"></i> Daily Analysis Results</h3>
+                <div class="chart-container">
+                    <img src="data:image/png;base64,{{ plots.text_length }}" alt="Daily Analysis Results" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title"><i class="fas fa-chart-bar"></i> Analysis Types Distribution</h3>
+                <div class="chart-container">
+                    <img src="data:image/png;base64,{{ plots.title_length }}" alt="Analysis Types Distribution" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title"><i class="fas fa-chart-area"></i> Confidence Score Distribution</h3>
+                <div class="chart-container">
+                    <img src="data:image/png;base64,{{ plots.word_count }}" alt="Confidence Score Distribution" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading visualizations...</p>
+        </div>
+        {% endif %}
+
+        <div class="model-info">
+            <h3><i class="fas fa-brain"></i> Model Information</h3>
+            <p>Our fake news detection model uses advanced machine learning techniques to analyze news articles and identify potential misinformation.</p>
+            
+            <div class="model-stats">
+                <div class="model-stat">
+                    <div class="model-stat-number">TF-IDF</div>
+                    <div class="model-stat-label">Vectorization</div>
+                </div>
+                <div class="model-stat">
+                    <div class="model-stat-number">Logistic Regression</div>
+                    <div class="model-stat-label">Algorithm</div>
+                </div>
+                <div class="model-stat">
+                    <div class="model-stat-number">NLTK</div>
+                    <div class="model-stat-label">Text Processing</div>
+                </div>
+                <div class="model-stat">
+                    <div class="model-stat-number">Real-time</div>
+                    <div class="model-stat-label">Analysis</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="insights-section">
+            <h3 class="insights-title"><i class="fas fa-lightbulb"></i> Key Insights</h3>
+            <div class="insights-grid">
+                <div class="insight-item">
+                    <div class="insight-title">Dataset Balance</div>
+                    <div class="insight-text">
+                        Our dataset contains {{ stats.true_news }} true news articles and {{ stats.fake_news }} fake news articles, 
+                        providing a balanced training set for our model.
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">Text Analysis</div>
+                    <div class="insight-text">
+                        The average article length is {{ stats.avg_text_length }} characters, 
+                        allowing for comprehensive analysis of content patterns.
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">Model Performance</div>
+                    <div class="insight-text">
+                        Our Logistic Regression model with TF-IDF vectorization achieves high accuracy 
+                        in distinguishing between true and fake news articles.
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">Real-time Processing</div>
+                    <div class="insight-text">
+                        The model processes articles in real-time, providing instant results 
+                        with confidence scores and probability distributions.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate stat cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Update real-time statistics every 5 seconds
+            setInterval(updateRealTimeStats, 5000);
+        });
+
+        // Function to update real-time statistics
+        async function updateRealTimeStats() {
+            try {
+                const response = await fetch('/api/dashboard-update');
+                const data = await response.json();
+                
+                if (data.combined_stats) {
+                    // Update main statistics
+                    document.getElementById('totalNews').textContent = data.combined_stats.total_news;
+                    document.getElementById('trueNews').textContent = data.combined_stats.true_news;
+                    document.getElementById('fakeNews').textContent = data.combined_stats.fake_news;
+                    document.getElementById('totalAnalyses').textContent = data.analysis_stats.total_analyses;
+                    
+                    // Update subtitles
+                    const trueNewsCard = document.querySelector('.stat-card:nth-child(2) .stat-subtitle');
+                    const fakeNewsCard = document.querySelector('.stat-card:nth-child(3) .stat-subtitle');
+                    
+                    if (trueNewsCard) {
+                        trueNewsCard.textContent = `Dataset: ${data.dataset_stats.true_news} | Analysis: ${data.analysis_stats.true_analyses}`;
+                    }
+                    if (fakeNewsCard) {
+                        fakeNewsCard.textContent = `Dataset: ${data.dataset_stats.fake_news} | Analysis: ${data.analysis_stats.fake_analyses}`;
+                    }
+                }
+                
+                if (data.analysis_stats) {
+                    document.getElementById('totalSearches').textContent = data.analysis_stats.total_analyses;
+                    document.getElementById('realDetected').textContent = data.analysis_stats.true_analyses;
+                    document.getElementById('fakeDetected').textContent = data.analysis_stats.fake_analyses;
+                    document.getElementById('imageAnalyses').textContent = data.analysis_stats.image_analyses;
+                    document.getElementById('multilingualAnalyses').textContent = data.analysis_stats.multilingual_analyses;
+                }
+            } catch (error) {
+                console.error('Error updating real-time stats:', error);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+{
+  "analyses": [
+    {
+      "id": 1,
+      "timestamp": "2025-09-20T18:51:20.652938",
+      "title": "",
+      "content_length": 260,
+      "prediction": 0,
+      "confidence": 0.9020538207537324,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 2,
+      "timestamp": "2025-09-20T18:58:47.883001",
+      "title": "",
+      "content_length": 49,
+      "prediction": 0,
+      "confidence": 0.615960171934675,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 3,
+      "timestamp": "2025-09-20T18:59:11.256206",
+      "title": "",
+      "content_length": 71,
+      "prediction": 0,
+      "confidence": 0.893629339014972,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 4,
+      "timestamp": "2025-10-07T11:45:13.255099",
+      "title": "",
+      "content_length": 42,
+      "prediction": 0,
+      "confidence": 0.7962766930326921,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 5,
+      "timestamp": "2025-10-07T11:45:26.342019",
+      "title": "",
+      "content_length": 49,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 6,
+      "timestamp": "2025-10-07T11:46:10.924061",
+      "title": "",
+      "content_length": 74,
+      "prediction": 0,
+      "confidence": 0.6182670483365497,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 7,
+      "timestamp": "2025-10-07T11:47:44.426898",
+      "title": "",
+      "content_length": 338,
+      "prediction": 0,
+      "confidence": 1.0,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 8,
+      "timestamp": "2025-10-07T11:48:10.416997",
+      "title": "",
+      "content_length": 83,
+      "prediction": 0,
+      "confidence": 1.0,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 9,
+      "timestamp": "2025-10-07T11:48:25.644244",
+      "title": "",
+      "content_length": 348,
+      "prediction": 0,
+      "confidence": 1.0,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 10,
+      "timestamp": "2025-10-07T11:48:28.542531",
+      "title": "",
+      "content_length": 348,
+      "prediction": 0,
+      "confidence": 1.0,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 11,
+      "timestamp": "2025-10-07T11:48:29.256785",
+      "title": "",
+      "content_length": 348,
+      "prediction": 0,
+      "confidence": 1.0,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 12,
+      "timestamp": "2025-10-07T11:48:29.634081",
+      "title": "",
+      "content_length": 348,
+      "prediction": 0,
+      "confidence": 1.0,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 13,
+      "timestamp": "2025-10-07T11:48:52.399124",
+      "title": "",
+      "content_length": 460,
+      "prediction": 0,
+      "confidence": 1.0,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 14,
+      "timestamp": "2025-10-07T11:59:00.914999",
+      "title": "",
+      "content_length": 180,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 15,
+      "timestamp": "2025-10-07T11:59:13.081242",
+      "title": "",
+      "content_length": 180,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 16,
+      "timestamp": "2025-10-07T11:59:15.133309",
+      "title": "",
+      "content_length": 139,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 17,
+      "timestamp": "2025-10-07T11:59:17.181789",
+      "title": "",
+      "content_length": 161,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 18,
+      "timestamp": "2025-10-07T11:59:19.247545",
+      "title": "",
+      "content_length": 137,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 19,
+      "timestamp": "2025-10-07T12:00:17.700440",
+      "title": "",
+      "content_length": 180,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 20,
+      "timestamp": "2025-10-07T12:00:19.743122",
+      "title": "",
+      "content_length": 139,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 21,
+      "timestamp": "2025-10-07T12:00:21.802278",
+      "title": "",
+      "content_length": 161,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 22,
+      "timestamp": "2025-10-07T12:00:23.849947",
+      "title": "",
+      "content_length": 137,
+      "prediction": 0,
+      "confidence": 0.6754707793010456,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 23,
+      "timestamp": "2025-10-07T12:02:17.087505",
+      "title": "",
+      "content_length": 460,
+      "prediction": 0,
+      "confidence": 0.5286523524924611,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 24,
+      "timestamp": "2025-10-07T12:02:37.525400",
+      "title": "",
+      "content_length": 473,
+      "prediction": 1,
+      "confidence": 0.5143952964164427,
+      "analysis_type": "multilingual",
+      "is_fake": true
+    },
+    {
+      "id": 25,
+      "timestamp": "2025-10-07T12:02:54.416139",
+      "title": "",
+      "content_length": 442,
+      "prediction": 1,
+      "confidence": 0.5071778935834796,
+      "analysis_type": "multilingual",
+      "is_fake": true
+    },
+    {
+      "id": 26,
+      "timestamp": "2025-10-07T12:03:06.835150",
+      "title": "",
+      "content_length": 443,
+      "prediction": 0,
+      "confidence": 0.5153413207337123,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 27,
+      "timestamp": "2025-10-07T14:04:36.661494",
+      "title": "",
+      "content_length": 473,
+      "prediction": 1,
+      "confidence": 0.5143952964164427,
+      "analysis_type": "multilingual",
+      "is_fake": true
+    },
+    {
+      "id": 28,
+      "timestamp": "2025-10-07T14:05:00.589344",
+      "title": "",
+      "content_length": 477,
+      "prediction": 0,
+      "confidence": 0.5075265820620145,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 29,
+      "timestamp": "2025-10-07T14:05:12.125196",
+      "title": "",
+      "content_length": 460,
+      "prediction": 0,
+      "confidence": 0.5286523524924611,
+      "analysis_type": "multilingual",
+      "is_fake": false
+    },
+    {
+      "id": 30,
+      "timestamp": "2025-10-07T14:18:06.456702",
+      "title": "https://example.com/test.jpg",
+      "content_length": 28,
+      "prediction": 0,
+      "confidence": 0.85,
+      "analysis_type": "image",
+      "is_fake": false
+    },
+    {
+      "id": 31,
+      "timestamp": "2025-10-07T14:19:25.621548",
+      "title": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwwGbvk_eUVUviK95EAOgAowTQWs01sgL49Q&s",
+      "content_length": 92,
+      "prediction": 0,
+      "confidence": 0.85,
+      "analysis_type": "image",
+      "is_fake": false
+    },
+    {
+      "id": 32,
+      "timestamp": "2025-10-07T14:22:37.686546",
+      "title": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSEhIVFhUXGBsXGRgXFxgYHhsXFhodFxgdG",
+      "content_length": 1024,
+      "prediction": 0,
+      "confidence": 0.85,
+      "analysis_type": "image",
+      "is_fake": false
+    },
+    {
+      "id": 33,
+      "timestamp": "2025-10-07T14:22:57.804524",
+      "title": "",
+      "content_length": 473,
+      "prediction": 1,
+      "confidence": 0.5143952964164427,
+      "analysis_type": "multilingual",
+      "is_fake": true
+    },
+    {
+      "id": 34,
+      "timestamp": "2025-10-07T14:35:01.539127",
+      "title": "https://imgs.search.brave.com/Khli2KIfGks-GHmbZUKfk8gi0MNHWOuXXqvSwm6nCuU/rs:fit:500:0:1:0/g:ce/aHR0",
+      "content_length": 222,
+      "prediction": 0,
+      "confidence": 0.85,
+      "analysis_type": "image",
+      "is_fake": false
+    }
+  ],
+  "total_analyses": 34,
+  "true_analyses": 30,
+  "fake_analyses": 4,
+  "multilingual_analyses": 30,
+  "image_analyses": 4
+}

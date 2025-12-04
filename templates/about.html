@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Fake News Detection</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .content-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            color: #667eea;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-icon.python { color: #3776ab; }
+        .tech-icon.flask { color: #000000; }
+        .tech-icon.ml { color: #f7931e; }
+        .tech-icon.nlp { color: #4caf50; }
+
+        .tech-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .tech-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .process-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .step-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .features-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+
+        .feature-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .feature-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <i class="fas fa-shield-alt"></i> NetCred
+            </a>
+            <ul class="nav-links">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/dashboard"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="/advanced"><i class="fas fa-cogs"></i> Advanced</a></li>
+                <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1><i class="fas fa-shield-alt"></i> About Our Project</h1>
+            <p>Combatting misinformation with advanced AI technology and machine learning</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-bullseye section-icon"></i>
+                    Our Mission
+                </h2>
+                <p>In today's digital age, fake news and misinformation spread faster than ever before. Our mission is to provide a reliable, AI-powered tool that helps users distinguish between credible news sources and potentially misleading information.</p>
+                <p>We believe that access to accurate information is fundamental to a healthy democracy and informed society. By leveraging cutting-edge machine learning techniques, we aim to contribute to the fight against misinformation.</p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line section-icon"></i>
+                    The Challenge
+                </h2>
+                <p>Fake news detection is a complex challenge that requires understanding of language patterns, context, and subtle indicators of misinformation. Traditional fact-checking methods are time-consuming and cannot scale to handle the volume of content published daily.</p>
+                <p>Our solution addresses this by using machine learning to automatically analyze news articles and provide instant assessments of their credibility, helping users make informed decisions about the information they consume.</p>
+            </div>
+        </div>
+
+        <div class="tech-stack">
+            <div class="tech-card">
+                <div class="tech-icon python"><i class="fab fa-python"></i></div>
+                <div class="tech-title">Python</div>
+                <div class="tech-desc">Core programming language for data processing and machine learning</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon flask"><i class="fas fa-flask"></i></div>
+                <div class="tech-title">Flask</div>
+                <div class="tech-desc">Lightweight web framework for building the application</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon ml"><i class="fas fa-brain"></i></div>
+                <div class="tech-title">Machine Learning</div>
+                <div class="tech-desc">Scikit-learn for model training and prediction</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon nlp"><i class="fas fa-language"></i></div>
+                <div class="tech-title">NLP</div>
+                <div class="tech-desc">NLTK for natural language processing and text analysis</div>
+            </div>
+        </div>
+
+        <div class="process-section">
+            <h2 class="section-title">
+                <i class="fas fa-cogs section-icon"></i>
+                How It Works
+            </h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Text Input</div>
+                    <div class="step-desc">Users provide news title and content for analysis</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Preprocessing</div>
+                    <div class="step-desc">Text is cleaned, tokenized, and stemmed using NLTK</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Vectorization</div>
+                    <div class="step-desc">TF-IDF converts text into numerical features</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Prediction</div>
+                    <div class="step-desc">ML model analyzes features and provides results</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2 class="section-title">
+                <i class="fas fa-star section-icon"></i>
+                Key Features
+            </h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <div class="feature-content">
+                        <h4>Real-time Analysis</h4>
+                        <p>Get instant results with detailed confidence scores and probability distributions for each prediction.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-bar feature-icon"></i>
+                    <div class="feature-content">
+                        <h4>Comprehensive Dashboard</h4>
+                        <p>Visualize dataset statistics, model performance metrics, and detailed analytics.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <div class="feature-content">
+                        <h4>Privacy Focused</h4>
+                        <p>Your data is processed securely and not stored permanently on our servers.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt feature-icon"></i>
+                    <div class="feature-content">
+                        <h4>Responsive Design</h4>
+                        <p>Works seamlessly across all devices - desktop, tablet, and mobile phones.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-code feature-icon"></i>
+                    <div class="feature-content">
+                        <h4>API Access</h4>
+                        <p>RESTful API endpoints for integration with other applications and services.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-graduation-cap feature-icon"></i>
+                    <div class="feature-content">
+                        <h4>Educational</h4>
+                        <p>Learn about fake news detection techniques and understand the analysis process.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2><i class="fas fa-rocket"></i> Ready to Get Started?</h2>
+            <p>Join thousands of users who are already using our platform to verify news credibility</p>
+            <a href="/" class="cta-btn">
+                <i class="fas fa-play"></i> Try It Now
+            </a>
+        </div>
+    </div>
+</body>
+</html>
