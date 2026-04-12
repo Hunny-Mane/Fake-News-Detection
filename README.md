@@ -1,8 +1,8 @@
-# 🛡️ Fake News Detection System
+#  Fake News Detection System
 
 A comprehensive AI-powered fake news detection system with modern web interface, real-time analysis, and interactive dashboard.
 
-## 🌟 Features
+##  Features
 
 - **AI-Powered Analysis**: Advanced machine learning model using Logistic Regression and TF-IDF vectorization
 - **Real-time Detection**: Instant analysis with confidence scores and probability distributions
@@ -11,14 +11,14 @@ A comprehensive AI-powered fake news detection system with modern web interface,
 - **API Access**: RESTful endpoints for integration with other applications
 - **Privacy Focused**: Secure processing without permanent data storage
 
-## 🚀 Live Demo
+##  Live Demo
 
 The application provides:
 - **Home Page**: News analysis interface with real-time results
 - **Dashboard**: Analytics and visualizations of the dataset
 - **About Page**: Project information and technical details
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 - **Backend**: Python, Flask
 - **Machine Learning**: Scikit-learn, NLTK
@@ -27,7 +27,7 @@ The application provides:
 - **Frontend**: HTML5, CSS3, JavaScript
 - **UI Framework**: Custom responsive design with Font Awesome icons
 
-## 📊 Model Architecture
+##  Model Architecture
 
 The fake news detection model uses:
 - **Text Preprocessing**: NLTK for tokenization, stemming, and stop word removal
@@ -35,14 +35,14 @@ The fake news detection model uses:
 - **Classification**: Logistic Regression for binary classification
 - **Performance**: High accuracy on balanced dataset
 
-## 🎯 Dataset
+##  Dataset
 
 The model is trained on a comprehensive dataset containing:
 - **True News**: Verified factual news articles
 - **Fake News**: Misleading or false news articles
 - **Features**: Title and text content for analysis
 
-## 📦 Installation
+##  Installation
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -82,7 +82,7 @@ The model is trained on a comprehensive dataset containing:
    python train_model.py
    ```
 
-## 🚀 Running the Application
+##  Running the Application
 
 1. **Start the Flask server**
    ```bash
@@ -118,7 +118,7 @@ curl -X POST http://localhost:5000/api/predict \
   }'
 ```
 
-## 📊 API Endpoints
+##  API Endpoints
 
 - `GET /` - Home page with news analysis interface
 - `GET /dashboard` - Analytics dashboard with visualizations
@@ -127,7 +127,7 @@ curl -X POST http://localhost:5000/api/predict \
 - `POST /api/predict` - JSON API for news analysis
 - `GET /api/stats` - Dataset statistics and sample data
 
-## 🎨 Features Overview
+##  Features Overview
 
 ### Real-time Analysis
 - Instant text processing and analysis
@@ -150,55 +150,17 @@ curl -X POST http://localhost:5000/api/predict \
 - Word count distributions
 - Interactive charts and graphs
 
-## 🔧 Configuration
+##  Configuration
 
 The application can be configured by modifying:
 - `app.py` - Main application settings
 - `train_model.py` - Model training parameters
 - Template files - UI customization
 
-## 📈 Model Performance
+##  Model Performance
 
 The Logistic Regression model achieves:
 - High accuracy on balanced dataset
 - Fast inference times
 - Reliable confidence scoring
 - Robust text preprocessing
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Dataset providers for training data
-- Open-source community for libraries and tools
-- Contributors and maintainers
-
-## 📞 Support
-
-For questions or support:
-- Create an issue in the repository
-- Check the documentation
-- Review the code comments
-
-## 🔮 Future Enhancements
-
-- [ ] Multi-language support
-- [ ] Advanced NLP techniques
-- [ ] Real-time news API integration
-- [ ] Mobile application
-- [ ] Enhanced visualizations
-- [ ] Model ensemble methods
-
----
-
-**Built with ❤️ for combating misinformation**
