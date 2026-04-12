@@ -93,7 +93,7 @@ The model is trained on a comprehensive dataset containing:
    - Open your browser and go to `http://localhost:5000`
    - The application will be available on all network interfaces
 
-## 📱 Usage
+##  Usage
 
 ### Home Page
 1. Navigate to the home page
@@ -118,15 +118,6 @@ curl -X POST http://localhost:5000/api/predict \
   }'
 ```
 
-##  API Endpoints
-
-- `GET /` - Home page with news analysis interface
-- `GET /dashboard` - Analytics dashboard with visualizations
-- `GET /about` - Project information and technical details
-- `POST /predict-form` - Form-based news analysis
-- `POST /api/predict` - JSON API for news analysis
-- `GET /api/stats` - Dataset statistics and sample data
-
 ##  Features Overview
 
 ### Real-time Analysis
@@ -149,13 +140,6 @@ curl -X POST http://localhost:5000/api/predict \
 - Histograms for text length analysis
 - Word count distributions
 - Interactive charts and graphs
-
-##  Configuration
-
-The application can be configured by modifying:
-- `app.py` - Main application settings
-- `train_model.py` - Model training parameters
-- Template files - UI customization
 
 ##  Model Performance
 
