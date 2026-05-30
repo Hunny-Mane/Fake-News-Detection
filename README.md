@@ -4,6 +4,8 @@ A comprehensive AI-powered fake news detection system with modern web interface,
 
 ##  Features
 
+
+
 - **AI-Powered Analysis**: Advanced machine learning model using Logistic Regression and TF-IDF vectorization
 - **Real-time Detection**: Instant analysis with confidence scores and probability distributions
 - **Interactive Dashboard**: Comprehensive visualizations and statistics
